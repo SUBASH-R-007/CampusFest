@@ -1,0 +1,8 @@
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine On
+RewriteRule ^api(?:/|$) index.php [L,QSA]
+RewriteRule (^|/)(\.|storage|src|scripts|tests|backend)(/|$) - [R=404,L]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule \.(css|js|jpg|jpeg|png|svg|webp|ico|woff2?)$ - [L,NC]
+RewriteRule ^ index.php [L,QSA]
