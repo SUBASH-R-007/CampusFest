@@ -1,0 +1,29 @@
+# Paid resources. Apply only after reviewing the charges in Render.
+services:
+  - type: web
+    name: campusfest
+    runtime: docker
+    plan: 0.5c-512mb
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    autoDeployTrigger: off
+    initialDeployHook: su -s /bin/sh www-data -c 'php /var/www/html/deploy/render-init.php'
+    disk:
+      name: campusfest-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: CAMPUSFEST_STORAGE
+        value: /var/data/campusfest
+      - key: CAMPUSFEST_CAMPUS_NAME
+        value: CampusFest
+      - key: CAMPUSFEST_ORGANIZER_EMAIL
+        sync: false
+      - key: CAMPUSFEST_ORGANIZER_NAME
+        value: SUBASH R
+      - key: CAMPUSFEST_ORGANIZER_PASSWORD
+        generateValue: true
