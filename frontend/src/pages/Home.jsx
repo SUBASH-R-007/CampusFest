@@ -5,6 +5,7 @@ import { useSession } from "../hooks/Session";
 import EventCard from "../components/EventCard";
 import { Icon, ErrorAlert, Loading } from "../components/UI";
 import { shortDate } from "../utils/format";
+import { assetPath } from "../utils/hosting";
 export default function Home() {
   const { data: events, loading, error } = useResource("/events");
   const { session } = useSession();
@@ -60,7 +61,7 @@ export default function Home() {
           <div className="hero-visual">
             <div className="hero-photo">
               <img
-                src="/images/campus.jpg"
+                src={assetPath("/images/campus.jpg")}
                 alt="A warm campus library with tall shelves and study spaces"
                 fetchPriority="high"
               />

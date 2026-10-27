@@ -2,6 +2,12 @@
 
 **Discover. Register. Show up.**
 
+## GitHub Pages frontend
+
+The static preview is published at **https://subash-r-007.github.io/CampusFest/**. It hosts the built HTML, CSS, JavaScript and images only. Sample event content and dates are illustrative. Search, filters and event details work without a server. Registration, private passes, organizer login and attendance are unavailable because PHP is not hosted on GitHub Pages. No participant data is collected or saved in this preview.
+
+The `Deploy static frontend to GitHub Pages` workflow builds `npm --prefix frontend run build:pages` and deploys only `frontend/dist`. Hash routes such as `/#/events` support direct refresh, and assets use the repository base path. Changes under `frontend/` on `main` trigger publication. The usual `npm --prefix frontend run build` still builds the full PHP-connected application for local use or PHP hosting. No Render service or paid hosting is needed for this preview.
+
 A Web Programming course project: a React + Bootstrap event portal backed by plain PHP and persistent JSON files. Students discover events, register solo or as a team, retrieve private passes, and cancel before the event starts. Organizers sign in to manage owned events, inspect FIFO waiting lists, recover pass access after verification, record participant attendance, and export CSV.
 
 Sample campus names, people and events are fictional demo content. This is not an endorsed institutional service. Student IDs/emails are self-entered and are not verified identities.

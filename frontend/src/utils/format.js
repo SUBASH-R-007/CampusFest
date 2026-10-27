@@ -28,6 +28,7 @@ export function utcDate(value) {
   return value ? new Date(`${value}:00+05:30`).toISOString() : "";
 }
 export function availability(event) {
+  if (event.preview) return "Sample event";
   if (!event.canRegister || event.availability === "closed")
     return "Registration closed";
   if (event.availability === "waitlist") return "Waiting list open";

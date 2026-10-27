@@ -10,6 +10,7 @@ import {
   Icon,
 } from "../components/UI";
 import { filterEvents, availability, dateTime } from "../utils/format";
+import { assetPath, STATIC_PREVIEW } from "../utils/hosting";
 export function Events() {
   const { data, loading, error } = useResource("/events");
   const [params, setParams] = useSearchParams();
@@ -141,7 +142,7 @@ export function EventDetails() {
       </div>
       <img
         className="detail-photo"
-        src={event.image}
+        src={assetPath(event.image)}
         alt={`${event.category} event atmosphere`}
       />
       <div className="detail-grid">
@@ -190,9 +191,16 @@ export function EventDetails() {
             {availability(event)}
           </span>
           <h3>{event.canRegister ? "Be part of it." : "Stay in the loop."}</h3>
-          <p>
-            {event.confirmedCount} of {event.capacity} {event.unit} confirmed
-          </p>
+          {STATIC_PREVIEW ? (
+            <p>
+              Illustrative capacity: {event.capacity} {event.unit}. No live
+              registrations.
+            </p>
+          ) : (
+            <p>
+              {event.confirmedCount} of {event.capacity} {event.unit} confirmed
+            </p>
+          )}
           <div className="capacity-track">
             <span
               style={{
@@ -222,7 +230,9 @@ export function EventDetails() {
             </Link>
           ) : (
             <button className="btn btn-secondary w-100" disabled>
-              Registration closed
+              {STATIC_PREVIEW
+                ? "Registration unavailable in preview"
+                : "Registration closed"}
             </button>
           )}
           <p className="small mt-3 mb-0">

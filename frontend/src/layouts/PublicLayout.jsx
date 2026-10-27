@@ -2,12 +2,24 @@ import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Brand, Icon } from "../components/UI";
 import { useSession } from "../hooks/Session";
+import { STATIC_PREVIEW } from "../utils/hosting";
 export default function PublicLayout() {
   const [open, setOpen] = useState(false);
   const { session } = useSession();
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a
+        className="skip-link"
+        href="#main"
+        onClick={
+          STATIC_PREVIEW
+            ? (event) => {
+                event.preventDefault();
+                document.getElementById("main")?.focus();
+              }
+            : undefined
+        }
+      >
         Skip to content
       </a>
       <header className="site-header no-print">
@@ -45,7 +57,15 @@ export default function PublicLayout() {
           </button>
         </div>
       </header>
-      <main id="main">
+      {STATIC_PREVIEW && (
+        <div className="static-preview-banner" role="note">
+          <div className="container">
+            <strong>Static preview</strong> — sample events and illustrative
+            dates. Registration, login and attendance are unavailable.
+          </div>
+        </div>
+      )}
+      <main id="main" tabIndex={-1}>
         <Outlet />
       </main>
       <footer className="site-footer no-print">

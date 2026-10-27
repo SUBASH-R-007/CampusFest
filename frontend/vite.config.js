@@ -1,6 +1,13 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base:
+    mode === "pages"
+      ? `/${process.env.GITHUB_REPOSITORY?.split("/")[1] || "CampusFest"}/`
+      : "/",
+  define: {
+    "import.meta.env.VITE_STATIC_PREVIEW": JSON.stringify(mode === "pages"),
+  },
   plugins: [react()],
   server: {
     proxy: {
@@ -12,4 +19,4 @@ export default defineConfig({
     globals: true,
     setupFiles: "./src/tests/setup.js",
   },
-});
+}));

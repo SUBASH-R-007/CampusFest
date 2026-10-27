@@ -2460,3 +2460,10 @@ textarea:focus-visible {
   height: 29px;
   object-fit: contain;
 }
+.static-preview-banner {
+  background: #eee8fc;
+  color: #382066;
+  padding: 12px 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { availability, shortDate, dateTime } from "../utils/format";
 import { Icon } from "./UI";
+import { assetPath } from "../utils/hosting";
 export default function EventCard({ event }) {
   return (
     <article className="event-card">
@@ -10,7 +11,11 @@ export default function EventCard({ event }) {
         tabIndex={-1}
         aria-hidden="true"
       >
-        <img src={event.image || "/images/campus.jpg"} alt="" loading="lazy" />
+        <img
+          src={assetPath(event.image || "/images/campus.jpg")}
+          alt=""
+          loading="lazy"
+        />
         <span className="date-chip">{shortDate(event.startAt)}</span>
         <span className="image-category">{event.category}</span>
       </Link>

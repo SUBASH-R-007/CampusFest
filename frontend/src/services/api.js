@@ -1,3 +1,4 @@
+import { STATIC_PREVIEW } from "../utils/hosting";
 let csrfToken = "";
 export class ApiError extends Error {
   constructor(message, code, fields = {}, status = 0) {
@@ -8,6 +9,10 @@ export class ApiError extends Error {
   }
 }
 export async function api(path, { method = "GET", body, signal } = {}) {
+  if (STATIC_PREVIEW) {
+    const { staticPreviewRequest } = await import("./staticPreview");
+    return staticPreviewRequest(path, method);
+  }
   let response;
   try {
     response = await fetch(`/api${path}`, {
